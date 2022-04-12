@@ -19,12 +19,12 @@ export const state = reactive({
   passwordError: false,
 })
 
-export default function useAuth() {
-  const firebaseConfig = {
+const firebaseConfig = {
     apiKey: process.env.VUE_APP_API_KEY,
     authDomain: process.env.VUE_APP_AUTH_DOMAIN,
   }
 
+export default function useAuth() {
   const app = initializeApp(firebaseConfig)
   const auth = getAuth(app)
   auth.setPersistence(browserSessionPersistence)
