@@ -4,6 +4,7 @@ import { request } from '@/api'
 export default function useMission() {
   const state = reactive({
     missions: null,
+    export: null,
   })
 
   const list = () => {
@@ -26,5 +27,13 @@ export default function useMission() {
     })
   }
 
-  return { state, list, create, update }
+  const htmlExport = () => {
+    return request('get', '/api/export/html', state.missions).then(
+      (response) => {
+        state.export = response.data.body
+      }
+    )
+  }
+
+  return { state, list, create, update, htmlExport }
 }
