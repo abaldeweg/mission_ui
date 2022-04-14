@@ -28,11 +28,7 @@ export default function useMission() {
   }
 
   const htmlExport = () => {
-    return request('get', '/api/export/html', state.missions).then(
-      (response) => {
-        state.export = response.data.body
-      }
-    )
+    state.export = null
   }
 
   return { state, list, create, update, htmlExport }
