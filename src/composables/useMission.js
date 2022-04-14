@@ -8,7 +8,14 @@ export default function useMission() {
   })
 
   const list = () => {
-    return request('get', '/api/show').then((response) => {
+    return request(
+      'get',
+      '/api/show',
+      {},
+      {
+        name: 'missions.json',
+      }
+    ).then((response) => {
       state.missions = JSON.stringify(response.data)
     })
   }
@@ -22,7 +29,10 @@ export default function useMission() {
   }
 
   const update = () => {
-    return request('put', '/api/update', state.missions).then(() => {
+    return request('put', '/api/update', {
+      name: 'missions.json',
+      body: state.missions,
+    }).then(() => {
       list()
     })
   }
