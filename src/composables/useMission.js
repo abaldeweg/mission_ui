@@ -8,7 +8,7 @@ export default function useMission() {
   })
 
   const list = () => {
-    return request('get', '/api/show').then((response) => {
+    return request('get', '/api/mission/show').then((response) => {
       state.missions = JSON.stringify(response.data)
     })
   }
@@ -16,13 +16,13 @@ export default function useMission() {
   onMounted(list)
 
   const create = () => {
-    return request('post', '/api/create').then(() => {
+    return request('post', '/api/mission/create').then(() => {
       list()
     })
   }
 
   const update = () => {
-    return request('put', '/api/update', {
+    return request('put', '/api/mission/update', {
       body: state.missions,
     }).then(() => {
       list()
@@ -30,7 +30,7 @@ export default function useMission() {
   }
 
   const htmlExport = () => {
-    return request('get', '/api/export/html', state.missions).then(
+    return request('get', '/api/mission/export/html', state.missions).then(
       (response) => {
         state.export = response.data.body
       }
