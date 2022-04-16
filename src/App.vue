@@ -26,6 +26,11 @@
           </router-link>
         </b-tabs-link>
         <b-tabs-link>
+          <router-link :to="{ name: 'export' }">
+            {{ $t('export') }}
+          </router-link>
+        </b-tabs-link>
+        <b-tabs-link>
           <router-link :to="{ name: 'profile' }">
             {{ $t('settings') }}
           </router-link>

@@ -13,5 +13,6 @@
   "wrongCredentials": "Please, check your credentials.",
   "missions": "Missions",
   "create": "Create",
-  "settings": "Settings"
+  "settings": "Settings",
+  "export": "Export"
 }

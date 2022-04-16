@@ -4,38 +4,32 @@ import { request } from '@/api'
 export default function useMission() {
   const state = reactive({
     missions: null,
-    export: null,
+    isLoading: false,
   })
 
   const list = () => {
-    return request('get', '/api/mission/show').then((response) => {
-      state.missions = JSON.stringify(response.data)
-    })
+    state.isLoading = true
+
+    return request('get', '/api/mission/show')
+      .then((response) => {
+        state.missions = response.data
+      })
+      .finally(() => {
+        state.isLoading = false
+      })
   }
 
   onMounted(list)
 
   const create = () => {
-    return request('post', '/api/mission/create').then(() => {
-      list()
-    })
+    return request('post', '/api/mission/create')
   }
 
   const update = () => {
     return request('put', '/api/mission/update', {
       body: state.missions,
-    }).then(() => {
-      list()
     })
   }
 
-  const htmlExport = () => {
-    return request('get', '/api/mission/export/html', state.missions).then(
-      (response) => {
-        state.export = response.data.body
-      }
-    )
-  }
-
-  return { state, list, create, update, htmlExport }
+  return { state, create, update }
 }

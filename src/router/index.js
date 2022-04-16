@@ -21,6 +21,11 @@ const router = new VueRouter({
       }),
     },
     {
+      path: '/export',
+      name: 'export',
+      component: () => import('../views/ExportView'),
+    },
+    {
       path: '/profile',
       name: 'profile',
       component: () => import('../views/ProfileView'),

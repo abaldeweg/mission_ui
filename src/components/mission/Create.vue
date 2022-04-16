@@ -1,18 +1,18 @@
 <template>
-  <b-button design="outline" @click="mission.create">
+  <b-button design="outline" @click="create">
     {{ $t('create') }}
   </b-button>
 </template>
 
 <script>
-import useMission from '@/composables/useMission'
+import useMission from './../composables/useMission'
 
 export default {
   name: 'mission-create',
   setup() {
-    const mission = useMission()
+    const create = useMission()
 
-    return { mission }
+    return { create }
   },
 }
 </script>

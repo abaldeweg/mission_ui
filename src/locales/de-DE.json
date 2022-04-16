@@ -13,5 +13,6 @@
   "wrongCredentials": "Bitte prüfe die Zugangsdaten.",
   "missions": "Einsätze",
   "create": "Erstellen",
-  "settings": "Einstellungen"
+  "settings": "Einstellungen",
+  "export": "Export"
 }
