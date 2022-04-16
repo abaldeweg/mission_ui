@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import useMission from './../composables/useMission'
+import useMission from './../../composables/useMission'
 
 export default {
   name: 'mission-create',
