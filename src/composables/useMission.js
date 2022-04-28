@@ -12,7 +12,7 @@ export default function useMission() {
 
     return request('get', '/api/mission/show')
       .then((response) => {
-        state.missions = response.data
+        state.missions = JSON.stringify(response.data)
       })
       .finally(() => {
         state.isLoading = false

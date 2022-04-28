@@ -10,7 +10,7 @@ import useMission from './../../composables/useMission'
 export default {
   name: 'mission-create',
   setup() {
-    const create = useMission()
+    const { create } = useMission()
 
     return { create }
   },
