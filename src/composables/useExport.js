@@ -1,25 +1,20 @@
-import { onMounted, reactive } from '@vue/composition-api'
+import { onMounted, ref } from 'vue'
 import { request } from '@/api'
 
-export default function useExport() {
-  const state = reactive({
-    export: null,
-    isLoading: false,
-  })
+export function useExport() {
+  const content = ref(null)
+  const isLoading = ref(false)
 
-  const html = () => {
-    state.isLoading = true
+  const show = () => {
+    isLoading.value = true
 
-    return request('get', '/api/mission/export/html', state.missions)
-      .then((response) => {
-        state.export = response.data.body
-      })
-      .finally(() => {
-        state.isLoading = false
-      })
+    return request('get', '/api/mission/export/html').then((res) => {
+      content.value = res.data.body
+      isLoading.value = false
+    })
   }
 
-  onMounted(html)
+  onMounted(show)
 
-  return { state, html }
+  return { content, isLoading }
 }

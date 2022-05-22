@@ -1,11 +1,9 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
-Vue.use(VueRouter)
-
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.VUE_APP_BASE_URL,
+const router = createRouter({
+  history: createWebHistory(import.meta.env.VUE_APP_BASE_URL),
+  linkActiveClass: 'isActive',
+  linkExactActiveClass: 'isActiveExact',
   routes: [
     {
       path: '/',
@@ -15,28 +13,28 @@ const router = new VueRouter({
     {
       path: '/mission',
       name: 'mission',
-      component: () => import('../views/MissionView'),
-      props: (route) => ({
-        is404: route.params.is404,
-      }),
+      component: () => import('../views/MissionView.vue'),
+      props: true,
     },
     {
       path: '/export',
       name: 'export',
-      component: () => import('../views/ExportView'),
+      component: () => import('../views/ExportView.vue'),
+      props: true,
     },
     {
       path: '/profile',
       name: 'profile',
-      component: () => import('../views/ProfileView'),
+      component: () => import('../views/ProfileView.vue'),
+      props: true,
     },
     {
-      path: '*',
-      redirect: { name: 'mission', params: { is404: true } },
+      path: '/:pathMatch(.*)',
+      redirect: { name: 'index' },
     },
   ],
   scrollBehavior() {
-    return { x: 0, y: 0 }
+    return { top: 0 }
   },
 })
 

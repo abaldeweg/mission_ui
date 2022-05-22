@@ -1,22 +1,17 @@
-<template>
-  <article>
-    <b-container size="m">
-      <h1>{{ $t('export') }}</h1>
-      <mission-export />
-    </b-container>
-  </article>
-</template>
+<script setup>
+import { useTitle } from '@baldeweg/ui'
+import MissionExport from '../components/export/ExportExport.vue'
 
-<script>
-import MissionExport from '../components/export/Export.vue'
+defineProps({
+  auth: Object,
+})
 
-export default {
-  name: 'mission-view',
-  head: {
-    title: 'Missions',
-  },
-  components: {
-    MissionExport,
-  },
-}
+useTitle({ title: 'Export' })
 </script>
+
+<template>
+  <BContainer size="m">
+    <h1>{{ $t('export') }}</h1>
+    <MissionExport />
+  </BContainer>
+</template>

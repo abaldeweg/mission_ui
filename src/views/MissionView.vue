@@ -1,28 +1,22 @@
-<template>
-  <article>
-    <b-container size="m">
-      <mission-create :style="{ float: 'right' }" />
-      <h1>{{ $t('missions') }}</h1>
-    </b-container>
+<script setup>
+import { useTitle } from '@baldeweg/ui'
+import MissionCreate from './../components/mission/MissionCreate.vue'
+import MissionEdit from './../components/mission/MissionEdit.vue'
 
-    <b-container size="m">
-      <mission-edit />
-    </b-container>
-  </article>
-</template>
+defineProps({
+  auth: Object,
+})
 
-<script>
-import MissionEdit from './../components/mission/Edit.vue'
-import MissionCreate from './../components/mission/Create.vue'
-
-export default {
-  name: 'mission-view',
-  head: {
-    title: 'Missions',
-  },
-  components: {
-    MissionEdit,
-    MissionCreate,
-  },
-}
+useTitle({ title: 'Missions' })
 </script>
+
+<template>
+  <BContainer size="m">
+    <MissionCreate :style="{ float: 'right' }" />
+    <h1>{{ $t('missions') }}</h1>
+  </BContainer>
+
+  <BContainer size="m">
+    <MissionEdit />
+  </BContainer>
+</template>

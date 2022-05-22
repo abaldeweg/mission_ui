@@ -1,22 +1,17 @@
-import { onMounted, reactive } from '@vue/composition-api'
+import { onMounted, ref } from 'vue'
 import { request } from '@/api'
 
-export default function useMission() {
-  const state = reactive({
-    missions: null,
-    isLoading: false,
-  })
+export function useMission() {
+  const missions = ref(null)
+  const isLoading = ref(false)
 
   const list = () => {
-    state.isLoading = true
+    isLoading.value = true
 
-    return request('get', '/api/mission/show')
-      .then((response) => {
-        state.missions = JSON.stringify(response.data)
-      })
-      .finally(() => {
-        state.isLoading = false
-      })
+    return request('get', '/api/mission/show').then((response) => {
+      missions.value = JSON.stringify(response.data)
+      isLoading.value = false
+    })
   }
 
   onMounted(list)
@@ -27,9 +22,9 @@ export default function useMission() {
 
   const update = () => {
     return request('put', '/api/mission/update', {
-      body: state.missions,
+      body: missions.value,
     })
   }
 
-  return { state, create, update }
+  return { missions, isLoading, create, update }
 }
