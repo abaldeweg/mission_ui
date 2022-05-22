@@ -6,7 +6,6 @@
   "login": "Login",
   "logout": "Logout",
   "theme": "Themes",
-  "language": "Sprache",
   "save": "Speichern",
   "passwordError": "Passwort konnte nicht geändert werden.",
   "passwordSuccessful": "Passwort geändert.",
