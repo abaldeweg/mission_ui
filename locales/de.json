@@ -13,5 +13,6 @@
   "missions": "Einsätze",
   "create": "Erstellen",
   "settings": "Einstellungen",
-  "export": "Export"
+  "export": "Export",
+  "dark_mode": "Dark-Mode"
 }

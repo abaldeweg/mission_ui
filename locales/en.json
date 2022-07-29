@@ -13,5 +13,6 @@
   "missions": "Missions",
   "create": "Create",
   "settings": "Settings",
-  "export": "Export"
+  "export": "Export",
+  "dark_mode": "Dark Mode"
 }
