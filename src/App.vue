@@ -12,7 +12,7 @@ const auth = useAuth()
 <template>
   <BApp>
     <BMasthead>
-      <BMastheadItem type="center">
+      <BMastheadItem position="center">
         <RouterLink :to="{ name: 'mission' }">
           <svg
             xmlns="http://www.w3.org/2000/svg"
