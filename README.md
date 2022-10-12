@@ -4,7 +4,7 @@ An app to administer a log file of missions.
 
 ## Repositories
 
-- mission <https://github.com/abaldeweg/mission> - Backend
+- mission_storage <https://github.com/abaldeweg/mission_storage> - Backend
 - mission_ui <https://github.com/abaldeweg/mission_ui> - UI
 
 ## Requirements
