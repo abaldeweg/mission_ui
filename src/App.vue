@@ -1,12 +1,44 @@
 <script setup>
-import { useLocale, useColorScheme } from '@baldeweg/ui'
+import { watch } from 'vue'
+import { useLocale, useColorScheme, useRequest } from '@baldeweg/ui'
+import { useGCPAuth } from '@/composables/useGCPAuth.js'
 import AuthLogin from '@/components/auth/Login.vue'
-import useAuth from '@/composables/useAuth.js'
+
+const { config, setAuthHeader } = useRequest()
+config.value.baseURL = import.meta.env.VUE_APP_API
+
+const firebaseConfig = {
+  apiKey: import.meta.env.VUE_APP_API_KEY,
+  authDomain: import.meta.env.VUE_APP_AUTH_DOMAIN,
+}
 
 useLocale()
 useColorScheme()
 
-const auth = useAuth()
+const {
+  logout,
+  token,
+  isAuthenticated,
+  user,
+  login,
+  username,
+  password,
+  isLoggingIn,
+} = useGCPAuth(firebaseConfig)
+
+const handleLogin = (event) => {
+  username.value = event.username
+  password.value = event.password
+
+  login()
+}
+
+watch(
+  () => token.value,
+  () => {
+    setAuthHeader(token.value)
+  }
+)
 </script>
 
 <template>
@@ -29,7 +61,7 @@ const auth = useAuth()
       </BMastheadItem>
     </BMasthead>
 
-    <BContainer size="m" v-if="auth.state.isAuthenticated">
+    <BContainer size="m" v-if="isAuthenticated">
       <BTabs>
         <BTabsLink>
           <RouterLink :to="{ name: 'mission' }">
@@ -47,18 +79,18 @@ const auth = useAuth()
           </RouterLink>
         </BTabsLink>
         <BTabsLink>
-          <a href="/logout" @click.prevent="auth.logout">
+          <a href="/logout" @click.prevent="logout">
             {{ $t('logout') }}
           </a>
         </BTabsLink>
       </BTabs>
     </BContainer>
 
-    <RouterView :auth="auth" v-if="auth.state.isAuthenticated" />
+    <RouterView :auth="user" v-if="isAuthenticated" />
 
-    <BContainer size="s" v-if="!auth.state.isAuthenticated">
+    <BContainer size="s" v-if="!isAuthenticated">
       <h1>{{ $t('login') }}</h1>
-      <AuthLogin />
+      <AuthLogin @login="handleLogin" :isLoggingIn="isLoggingIn" />
     </BContainer>
   </BApp>
 </template>
