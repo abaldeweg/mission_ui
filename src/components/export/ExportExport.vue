@@ -6,5 +6,12 @@ const { content, isLoading } = useExport()
 
 <template>
   <BSpinner size="m" v-if="isLoading" />
-  <BCode v-else>{{ content }}</BCode>
+  <b-form-textarea
+    v-model="content"
+    rows="10"
+    id="export"
+    @focus="$event.target.select()"
+    autofocus
+    v-else
+  />
 </template>
