@@ -3,7 +3,6 @@ import { initializeApp } from 'firebase/app'
 import {
   getAuth,
   signInWithEmailAndPassword,
-  onAuthStateChanged,
   signOut,
   updatePassword as firebaseUpdatePassword,
   browserSessionPersistence,
@@ -60,16 +59,6 @@ export function useGCPAuth(firebaseConfig) {
       password.value = null
     })
   }
-
-  onAuthStateChanged(auth, (currentUser) => {
-    if (currentUser) {
-      user.value = auth.currentUser
-      auth.currentUser.getIdToken().then((idToken) => {
-        token.value = idToken
-        isAuthenticated.value = true
-      })
-    }
-  })
 
   return {
     user,
