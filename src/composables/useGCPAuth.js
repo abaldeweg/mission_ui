@@ -29,12 +29,10 @@ export function useGCPAuth(firebaseConfig) {
       auth,
       username.value,
       password.value
-    ).then(() => {
-      user.value = auth.currentUser
-      auth.currentUser.getIdToken().then((idToken) => {
-        token.value = idToken
-        isAuthenticated.value = true
-      })
+    ).then((userCredential) => {
+      user.value = userCredential.user
+      token.value = null
+      isAuthenticated.value = true
       isLoggingIn.value = false
 
       username.value = null
